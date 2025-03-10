@@ -1,15 +1,21 @@
 pipeline {
-    agent { label params.HOSTNAME }
+    agent any
+
     parameters {
-        string(name: 'HOSTNAME', defaultValue: 'default-host', description: 'Hostname to run the job on')
+        string(name: 'VM_IP', defaultValue: '', description: 'IP address of the Linux VM')
     }
-    parameters {
-        string(name: 'VM_IP', defaultValue: '127.0.0.1', description: 'IP address of the VM to run the job on')
-    }
+
     stages {
-        stage('Hello') {
+        stage('Hello World') {
             steps {
-                sh 'echo Hello'
+                script {
+                    if (params.VM_IP == '') {
+                        error 'VM_IP parameter is required'
+                    }
+                }
+                sh """
+                    ssh user@${params.VM_IP} 'echo Hello World'
+                """
             }
         }
     }
