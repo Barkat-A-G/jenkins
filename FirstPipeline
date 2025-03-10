@@ -1,5 +1,8 @@
 pipeline {
-    agent any
+    agent { label params.HOSTNAME }
+    parameters {
+        string(name: 'HOSTNAME', defaultValue: 'default-host', description: 'Hostname to run the job on')
+    }
     stages {
         stage('Hello') {
             steps {
