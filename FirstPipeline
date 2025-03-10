@@ -3,10 +3,13 @@ pipeline {
     parameters {
         string(name: 'HOSTNAME', defaultValue: 'default-host', description: 'Hostname to run the job on')
     }
+    parameters {
+        string(name: 'VM_IP', defaultValue: '127.0.0.1', description: 'IP address of the VM to run the job on')
+    }
     stages {
         stage('Hello') {
             steps {
-                sh 'echo Hello, World!'
+                sh 'echo Hello'
             }
         }
     }
