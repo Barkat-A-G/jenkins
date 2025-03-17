@@ -8,15 +8,7 @@ pipeline {
     stages {
         stage('Hello World') {
             steps {
-                script {
-                    if (params.VM_IP == '') {
-                        error 'VM_IP parameter is required'
-                    }
-                }
-                sh """
-                    ssh user@${params.VM_IP} 'echo Hello World'
-                """
-            }
+                sh "echo 'Hello from github'"
         }
     }
 }
